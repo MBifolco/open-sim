@@ -1,0 +1,76 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, graphicx, caption, subcaption}
+
+\title{Population Dynamics and Resource Sustainability: A Simulation-Based Study of Intelligence-Driven Resource Impact}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This study explores the dynamics of population survival, resource sustainability, and the role of intelligence in resource management. Using an agent-based simulation model, we analyze how populations with varying intelligence distributions interact with a finite resource pool. The results highlight three distinct population outcomes: rapid extinction, indefinite sustainability, and eventual collapse after prolonged survival. Our findings emphasize the critical role of intelligence in resource generation and consumption, offering insights into population-resource dynamics and their long-term sustainability.
+\end{abstract}
+
+\section{Introduction}
+The balance between population dynamics and resource sustainability is a critical factor in ecological and socio-economic systems. This study investigates how intelligence, as a trait, influences resource consumption and generation within populations. By incorporating intelligence-based resource dynamics into an agent-based model, we explore the conditions that lead to population survival, extinction, or eventual collapse.
+
+\section{Methods}
+\subsection{Agent-Based Model}
+The model represents populations as collections of agents, each characterized by age, intelligence, resource consumption, and life expectancy. The intelligence of each agent is sampled from a normal distribution:
+\[
+I_i \sim \mathcal{N}(\mu, \sigma^2)
+\]
+where \( \mu \) is the mean intelligence and \( \sigma \) is the standard deviation. Agents consume or generate resources based on their intelligence relative to a net-zero threshold (\( I_\text{net-zero} \)).
+
+\subsection{Resource Impact}
+The resource impact of an agent \( i \) is defined as:
+\[
+R_i(I_i) = 
+\begin{cases} 
+-\alpha \cdot (1 - f(I_i))^2, & \text{if } I_i > I_\text{net-zero} \\
+C_i + (I_\text{net-zero} - I_i), & \text{if } I_i \leq I_\text{net-zero}
+\end{cases}
+\]
+where \( f(I_i) \) is the probability density function (PDF) of the intelligence distribution, and \( \alpha \) is a scaling constant representing the resource generation potential.
+
+\subsection{Population and Resource Dynamics}
+The total population size at generation \( t \) is given by:
+\[
+P_t = \sum_{i=1}^{P_t} \mathbb{1}(a_i \leq L_i) + N_t
+\]
+where \( \mathbb{1}(a_i \leq L_i) \) is an indicator function for agents still alive, and \( N_t \) is the number of new agents born. Resources evolve according to:
+\[
+R_{t+1} = R_t + R_\text{replenishment} - \sum_{i=1}^{P_t} R_i(I_i)
+\]
+
+\subsection{Simulation Setup}
+The model was implemented in Python and run for 500 generations across 100 simulations. Parameters for intelligence distributions, resource replenishment, and consumption were varied across simulations. Longevity, population size, and resource levels were tracked for each simulation.
+
+\section{Results}
+Three distinct population outcomes were observed:
+\begin{itemize}
+    \item \textbf{Rapid Extinction:} Populations deplete resources quickly, leading to extinction within a few generations.
+    \item \textbf{Sustainable Survival:} Populations with a favorable balance of intelligent agents sustain themselves indefinitely.
+    \item \textbf{Delayed Collapse:} Populations survive for extended periods before collapsing due to resource exhaustion.
+\end{itemize}
+
+Figure~\ref{fig:population_resources} illustrates the population and resource dynamics of the top-performing simulation, highlighting the stabilizing effect of intelligent agents on resource management.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{population_resources.png}
+    \caption{Population and resource dynamics for the top simulation by longevity. The population stabilizes as intelligent agents generate sufficient resources to offset consumption.}
+    \label{fig:population_resources}
+\end{figure}
+
+\section{Discussion}
+The results demonstrate the importance of intelligence in resource sustainability. Populations with higher proportions of intelligent agents tend to stabilize resource levels, preventing collapse. However, when less intelligent agents dominate reproduction, resource depletion accelerates, leading to delayed collapse. This dynamic highlights the critical role of intelligence distributions in population survival.
+
+Future work could explore additional factors, such as inter-agent interactions, environmental variability, and the role of mutations in intelligence.
+
+\section{Conclusion}
+This study provides a framework for understanding population-resource dynamics through intelligence-based modeling. The findings underscore the importance of balancing consumption and generation to achieve long-term sustainability.
+
+\end{document}
